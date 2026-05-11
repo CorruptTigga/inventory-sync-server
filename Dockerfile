@@ -1,11 +1,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-COPY InventorySync.Server.csproj .
-RUN dotnet restore
+COPY InventorySync.Server/InventorySync.Server.csproj InventorySync.Server/
+RUN dotnet restore InventorySync.Server/InventorySync.Server.csproj
 
-COPY . .
-RUN dotnet publish -c Release -o /app/publish
+COPY InventorySync.Server/ InventorySync.Server/
+RUN dotnet publish InventorySync.Server/InventorySync.Server.csproj -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
